@@ -13,6 +13,8 @@ public class Portal : MonoBehaviour
     public Transform characterPos;
     public Transform resetpos;
     public Door[] doors;
+    // 포탈 명칭
+    public string portalname;
 
     private bool _isDark, _isLight, _isTimer;
     private float _alpha = 0f, _timer = 0f;
@@ -39,6 +41,9 @@ public class Portal : MonoBehaviour
                 movelandscape.ResetLandScapePosition();
                 // 캐릭터 위치 초기화
                 characterPos.position = resetpos.position;
+                // PortalManager 스크립트에 값 업데이트 요청
+                PortalManager.instance.PortalCheck(portalname);
+                PortalManager.instance.MakeCheckRandomTrap();
                 // 문 위치 초기화
                 foreach(Door i in doors)
                     i.ResetDoor();
